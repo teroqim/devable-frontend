@@ -1,0 +1,24 @@
+.dashboard-body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .dashboard-main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .dashboard-main {
+    flex: 1;
+    overflow-y: auto;
+    background-color: hsl(var(--colors-background));
+  }
+}
+
+@media (min-width: 768px) {
+  .dashboard-body {
+    flex-direction: row;
+  }
+}

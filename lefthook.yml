@@ -1,0 +1,16 @@
+pre-commit:
+  commands:
+    prettier:
+      run: npm run lint:format:staged
+
+pre-push:
+  commands:
+    lint:
+      run: npm run lint -- --quiet
+    build:
+      run: npm run build
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx --no -- commitlint --edit

@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npm run prettier"
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "code-review@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "pr-review-toolkit@claude-plugins-official": true,
+    "github@claude-plugins-official": true
+  },
+  "plansDirectory": ".claude/claude-plans"
+}

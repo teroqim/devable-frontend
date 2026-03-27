@@ -1,0 +1,123 @@
+/* ============================================
+   THEME CONFIGURATION
+   Design tokens and CSS custom properties
+   ============================================ */
+
+:root {
+  /* ===== Colors ===== */
+  --colors-background: 0 0% 100%;
+  --colors-foreground: 0 0% 3.9%;
+  --colors-card: 0 0% 100%;
+  --colors-card-foreground: 0 0% 3.9%;
+
+  --colors-primary: 0 0% 9%;
+  --colors-primary-foreground: 0 0% 98%;
+  --colors-secondary: 0 0% 96.1%;
+  --colors-secondary-foreground: 0 0% 9%;
+
+  --colors-muted: 0 0% 96.1%;
+  --colors-muted-foreground: 0 0% 45.1%;
+  --colors-accent: 0 0% 96.1%;
+  --colors-accent-foreground: 0 0% 9%;
+  --colors-destructive: 0 84.2% 60.2%;
+  --colors-destructive-foreground: 0 0% 98%;
+
+  --colors-border: 0 0% 89.8%;
+  --colors-input: 0 0% 89.8%;
+  --colors-ring: 0 0% 3.9%;
+
+  --colors-overlay: 0 0% 0%;
+
+  --colors-navbar-bg: 222 47% 11%;
+  --colors-navbar-hover: 222 47% 19%;
+  --colors-navbar-border: 215 25% 27%;
+  --colors-navbar-text: 0 0% 100%;
+  --colors-navbar-text-muted: 210 40% 91%;
+  --colors-navbar-active: 217 91% 60%;
+  --colors-navbar-active-border: 213 94% 68%;
+  --colors-navbar-loading: 215 20% 60%;
+  --colors-navbar-error: 0 84% 73%;
+
+  /* ===== Border Radius ===== */
+  --radius-6: 0.375rem;
+  --radius-8: 0.5rem;
+  --radius-12: 0.75rem;
+  --radius-full: 9999px;
+
+  /* ===== Spacing ===== */
+  --spacing-2: 0.125rem;
+  --spacing-4: 0.25rem;
+  --spacing-6: 0.375rem;
+  --spacing-8: 0.5rem;
+  --spacing-10: 0.625rem;
+  --spacing-12: 0.75rem;
+  --spacing-16: 1rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+
+  /* ===== Sizes ===== */
+  --size-32: 2rem;
+  --size-36: 2.25rem;
+  --size-40: 2.5rem;
+  --size-256: 16rem;
+
+  /* ===== Typography ===== */
+  --font-size-12: 0.75rem;
+  --font-size-14: 0.875rem;
+  --font-size-16: 1rem;
+  --font-size-18: 1.125rem;
+  --font-size-20: 1.25rem;
+  --font-size-24: 1.5rem;
+  --font-size-30: 1.875rem;
+
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ===== Shadows ===== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-lg:
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* ===== Transitions ===== */
+  --transition-fast: 150ms;
+  --transition-slow: 300ms;
+}
+
+.dark {
+  --colors-background: 0 0% 3.9%;
+  --colors-foreground: 0 0% 98%;
+  --colors-card: 0 0% 3.9%;
+  --colors-card-foreground: 0 0% 98%;
+  --colors-primary: 0 0% 98%;
+  --colors-primary-foreground: 0 0% 9%;
+  --colors-secondary: 0 0% 14.9%;
+  --colors-secondary-foreground: 0 0% 98%;
+  --colors-muted: 0 0% 14.9%;
+  --colors-muted-foreground: 0 0% 63.9%;
+  --colors-accent: 0 0% 14.9%;
+  --colors-accent-foreground: 0 0% 98%;
+  --colors-destructive: 0 62.8% 30.6%;
+  --colors-destructive-foreground: 0 0% 98%;
+  --colors-border: 0 0% 14.9%;
+  --colors-input: 0 0% 14.9%;
+  --colors-ring: 0 0% 83.1%;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+
+* {
+  border-color: hsl(var(--colors-border));
+}
+
+body {
+  background-color: hsl(var(--colors-background));
+  color: hsl(var(--colors-foreground));
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
