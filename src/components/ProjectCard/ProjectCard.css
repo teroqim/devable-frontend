@@ -1,0 +1,64 @@
+.project-card {
+  background-color: hsl(var(--colors-card));
+  border: 1px solid hsl(var(--colors-border));
+  border-radius: var(--radius-12);
+  padding: var(--spacing-20);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+
+  .project-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-12);
+  }
+
+  .project-card-status {
+    font-size: var(--font-size-12);
+    font-weight: var(--font-weight-medium);
+    padding: var(--spacing-2) var(--spacing-8);
+    border-radius: var(--radius-8);
+    white-space: nowrap;
+  }
+
+  .project-card-status--running {
+    background-color: hsl(142 76% 36% / 0.15);
+    color: hsl(142 76% 36%);
+  }
+
+  .project-card-status--starting {
+    background-color: hsl(48 96% 53% / 0.15);
+    color: hsl(48 96% 40%);
+  }
+
+  .project-card-status--stopped,
+  .project-card-status--created {
+    background-color: hsl(var(--colors-muted));
+    color: hsl(var(--colors-muted-foreground));
+  }
+
+  .project-card-status--error {
+    background-color: hsl(var(--colors-destructive) / 0.15);
+    color: hsl(var(--colors-destructive));
+  }
+
+  .project-card-slug {
+    font-size: var(--font-size-12);
+    color: hsl(var(--colors-muted-foreground));
+    font-family: monospace;
+  }
+
+  .project-card-date {
+    font-size: var(--font-size-12);
+    color: hsl(var(--colors-muted-foreground));
+  }
+
+  .project-card-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+    margin-top: var(--spacing-8);
+  }
+}

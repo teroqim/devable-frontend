@@ -11,3 +11,4 @@ paths:
 - Write base styles for mobile first. Add desktop styles in separate `@media (min-width: 768px)` blocks. Never nest media queries inside selectors.
 - Always wrap hover styles in `@media (hover: hover)` to prevent sticky hover states on touch devices.
 - Use `clsx` directly for conditional classes in components.
+- Do not style HTML tags directly (e.g. `input`, `select`, `div`). Always use CSS classes instead, unless there is a strong reason not to.

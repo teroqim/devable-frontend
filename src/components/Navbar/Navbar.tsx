@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home as HomeIcon, Menu as MenuIcon, X as XIcon } from 'lucide-react';
@@ -11,10 +11,6 @@ import './Navbar.css';
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
 
   const handleToggleMobileMenu = useCallback(() => {
     setMobileMenuOpen(prev => !prev);
@@ -30,6 +26,7 @@ export default function Navbar() {
         <Link
           href="/dashboard"
           className="navbar-mobile-home-link"
+          onClick={handleCloseMobileMenu}
         >
           <HomeIcon size={24} />
         </Link>
@@ -65,6 +62,7 @@ export default function Navbar() {
               className={clsx('navbar-link', {
                 active: pathname === '/dashboard',
               })}
+              onClick={handleCloseMobileMenu}
             >
               Dashboard
             </Link>

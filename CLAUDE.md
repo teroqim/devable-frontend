@@ -53,6 +53,7 @@ src/
 ### API Proxy Pattern
 
 Frontend uses Next.js API routes as a proxy to the backend:
+
 1. Client calls `/api/announcements` with Clerk bearer token
 2. API route validates token via `validateBearerToken()`
 3. Forwards request to `NEXT_PUBLIC_API_URL/v1/announcements`
@@ -71,7 +72,7 @@ npm run test:e2e     # Playwright e2e tests (requires dev server running)
 
 ## Git Workflow
 
-Do not handle git workflows. A human must handle git operations.
+You may do all read only commands freely, but you must always ask for permission before doing any write commands. This includes creating branches, making commits, pushing to remote, and merging branches.
 
 ## Dos and Don'ts
 

@@ -1,4 +1,4 @@
-import type { ApiAnnouncement } from '@/types/api';
+import type { ApiAnnouncement, ApiProject, CreateProjectBody, UpdateProjectBody } from '@/types/api';
 
 class ApiError extends Error {
   constructor(
@@ -44,6 +44,10 @@ async function apiRequest<T = unknown>(
     );
   }
 
+  if (response.status === 204) {
+    return undefined as T;
+  }
+
   return response.json() as Promise<T>;
 }
 
@@ -51,6 +55,62 @@ export async function fetchAnnouncements(
   getToken: () => Promise<string | null>,
 ): Promise<ApiAnnouncement[]> {
   return apiRequest<ApiAnnouncement[]>('/api/announcements', { getToken });
+}
+
+export async function fetchProjects(
+  getToken: () => Promise<string | null>,
+): Promise<ApiProject[]> {
+  return apiRequest<ApiProject[]>('/api/projects', { getToken });
+}
+
+export async function fetchProject(
+  id: string,
+  getToken: () => Promise<string | null>,
+): Promise<ApiProject> {
+  return apiRequest<ApiProject>(`/api/projects/${id}`, { getToken });
+}
+
+export async function createProject(
+  body: CreateProjectBody,
+  getToken: () => Promise<string | null>,
+): Promise<ApiProject> {
+  return apiRequest<ApiProject>('/api/projects', { method: 'POST', body, getToken });
+}
+
+export async function updateProject(
+  id: string,
+  body: UpdateProjectBody,
+  getToken: () => Promise<string | null>,
+): Promise<ApiProject> {
+  return apiRequest<ApiProject>(`/api/projects/${id}`, { method: 'PUT', body, getToken });
+}
+
+export async function deleteProject(
+  id: string,
+  getToken: () => Promise<string | null>,
+): Promise<void> {
+  await apiRequest(`/api/projects/${id}`, { method: 'DELETE', getToken });
+}
+
+export async function startProject(
+  id: string,
+  getToken: () => Promise<string | null>,
+): Promise<void> {
+  await apiRequest(`/api/projects/${id}/start`, { method: 'POST', getToken });
+}
+
+export async function stopProject(
+  id: string,
+  getToken: () => Promise<string | null>,
+): Promise<void> {
+  await apiRequest(`/api/projects/${id}/stop`, { method: 'POST', getToken });
+}
+
+export async function restartProject(
+  id: string,
+  getToken: () => Promise<string | null>,
+): Promise<void> {
+  await apiRequest(`/api/projects/${id}/restart`, { method: 'POST', getToken });
 }
 
 export { ApiError };

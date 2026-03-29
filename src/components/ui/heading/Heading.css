@@ -1,0 +1,29 @@
+.heading {
+  font-weight: var(--font-weight-bold);
+  color: hsl(var(--colors-foreground));
+  line-height: 1.2;
+}
+
+.heading--xs {
+  font-size: var(--font-size-14);
+}
+
+.heading--sm {
+  font-size: var(--font-size-16);
+}
+
+.heading--md {
+  font-size: var(--font-size-18);
+}
+
+.heading--lg {
+  font-size: var(--font-size-24);
+}
+
+.heading--xl {
+  font-size: var(--font-size-30);
+}
+
+.heading--2xl {
+  font-size: var(--font-size-36);
+}
