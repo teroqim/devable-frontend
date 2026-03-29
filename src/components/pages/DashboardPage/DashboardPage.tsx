@@ -12,6 +12,10 @@ import DeleteProjectDialog from '@/components/DeleteProjectDialog/DeleteProjectD
 import { Plus as PlusIcon } from 'lucide-react';
 import './DashboardPage.css';
 
+function getErrorMessage(err: unknown, fallback: string): string {
+  return err instanceof Error ? err.message : fallback;
+}
+
 export default function DashboardPage() {
   const { getToken, isLoaded } = useAuth();
   const [projects, setProjects] = useState<ApiProject[]>([]);
@@ -32,7 +36,7 @@ export default function DashboardPage() {
         setProjects(data);
         setError(null);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load projects');
+        setError(getErrorMessage(err, 'Failed to load projects'));
       } finally {
         setLoading(false);
       }
@@ -49,7 +53,7 @@ export default function DashboardPage() {
       setProjects(data);
       setShowCreateDialog(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create project');
+      setError(getErrorMessage(err, 'Failed to create project'));
     } finally {
       setCreating(false);
     }
@@ -64,7 +68,7 @@ export default function DashboardPage() {
       setProjects(data);
       setDeleteTarget(null);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete project');
+      setError(getErrorMessage(err, 'Failed to delete project'));
     } finally {
       setDeleting(false);
     }
@@ -76,7 +80,7 @@ export default function DashboardPage() {
       const data = await fetchProjects(getToken);
       setProjects(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to start project');
+      setError(getErrorMessage(err, 'Failed to start project'));
     }
   }
 
@@ -86,7 +90,7 @@ export default function DashboardPage() {
       const data = await fetchProjects(getToken);
       setProjects(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to stop project');
+      setError(getErrorMessage(err, 'Failed to stop project'));
     }
   }
 

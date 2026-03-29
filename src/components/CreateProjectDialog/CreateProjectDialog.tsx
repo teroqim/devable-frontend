@@ -33,6 +33,12 @@ export default function CreateProjectDialog({ open, onClose, onCreate, loading }
 
   if (!open) return null;
 
+  function resetForm() {
+    setName('');
+    setTemplate('');
+    setDesignTheme('');
+  }
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim()) return;
@@ -56,6 +62,7 @@ export default function CreateProjectDialog({ open, onClose, onCreate, loading }
   }
 
   function handleOverlayClick() {
+    resetForm();
     onClose();
   }
 
@@ -102,7 +109,7 @@ export default function CreateProjectDialog({ open, onClose, onCreate, loading }
           </div>
 
           <div className="dialog-actions">
-            <Button variant="outline" type="button" onClick={onClose} disabled={loading}>
+            <Button variant="outline" type="button" onClick={handleOverlayClick} disabled={loading}>
               Cancel
             </Button>
             <Button type="submit" disabled={loading || !name.trim()}>
