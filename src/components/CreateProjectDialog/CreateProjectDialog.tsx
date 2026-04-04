@@ -1,8 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
+import clsx from 'clsx';
 import { Button } from '@/components/ui/button/button';
 import Heading from '@/components/ui/heading/Heading';
+import { TEMPLATES, THEMES, TEMPLATES_WITHOUT_THEMES } from './CreateProjectDialog.constants';
 import './CreateProjectDialog.css';
 
 interface CreateProjectDialogProps {
@@ -12,53 +15,37 @@ interface CreateProjectDialogProps {
   loading: boolean;
 }
 
-const TEMPLATES = [
-  { value: '', label: 'None' },
-  { value: 'nextjs-ts', label: 'Next.js + TypeScript' },
-  { value: 'bun-elysia-api', label: 'Elysia API' },
-  { value: 'fullstack', label: 'Full-stack' },
-];
-
-const THEMES = [
-  { value: '', label: 'None' },
-  { value: 'clean', label: 'Clean' },
-  { value: 'bold', label: 'Bold' },
-  { value: 'soft', label: 'Soft' },
-];
-
 export default function CreateProjectDialog({ open, onClose, onCreate, loading }: CreateProjectDialogProps) {
   const [name, setName] = useState('');
-  const [template, setTemplate] = useState('');
-  const [designTheme, setDesignTheme] = useState('');
+  const [template, setTemplate] = useState('nextjs-ts');
+  const [designTheme, setDesignTheme] = useState('clean');
 
   if (!open) return null;
 
+  const showThemes = !TEMPLATES_WITHOUT_THEMES.has(template);
+
   function resetForm() {
     setName('');
-    setTemplate('');
-    setDesignTheme('');
+    setTemplate('nextjs-ts');
+    setDesignTheme('clean');
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim()) return;
-    onCreate(
-      name.trim(),
-      template || undefined,
-      designTheme || undefined,
-    );
+    onCreate(name.trim(), template, showThemes ? designTheme : undefined);
   }
 
   function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
   }
 
-  function handleTemplateChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setTemplate(e.target.value);
+  function handleTemplateSelect(value: string) {
+    setTemplate(value);
   }
 
-  function handleThemeChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setDesignTheme(e.target.value);
+  function handleThemeSelect(value: string) {
+    setDesignTheme(value);
   }
 
   function handleOverlayClick() {
@@ -91,22 +78,46 @@ export default function CreateProjectDialog({ open, onClose, onCreate, loading }
           </div>
 
           <div className="dialog-field">
-            <label className="dialog-label" htmlFor="project-template">Template (optional)</label>
-            <select id="project-template" className="dialog-select" value={template} onChange={handleTemplateChange}>
+            <span className="dialog-label">Template</span>
+            <div className="dialog-card-grid">
               {TEMPLATES.map((t) => (
-                <option key={t.value} value={t.value}>{t.label}</option>
+                <button
+                  key={t.value}
+                  type="button"
+                  className={clsx('dialog-card', template === t.value && 'dialog-card--selected')}
+                  onClick={() => handleTemplateSelect(t.value)}
+                >
+                  <span className="dialog-card-label">{t.label}</span>
+                  <span className="dialog-card-description">{t.description}</span>
+                </button>
               ))}
-            </select>
+            </div>
           </div>
 
-          <div className="dialog-field">
-            <label className="dialog-label" htmlFor="project-theme">Design theme (optional)</label>
-            <select id="project-theme" className="dialog-select" value={designTheme} onChange={handleThemeChange}>
-              {THEMES.map((t) => (
-                <option key={t.value} value={t.value}>{t.label}</option>
-              ))}
-            </select>
-          </div>
+          {showThemes && (
+            <div className="dialog-field">
+              <span className="dialog-label">Design theme</span>
+              <div className="dialog-theme-grid">
+                {THEMES.map((t) => (
+                  <button
+                    key={t.value}
+                    type="button"
+                    className={clsx('dialog-theme-card', designTheme === t.value && 'dialog-theme-card--selected')}
+                    onClick={() => handleThemeSelect(t.value)}
+                  >
+                    <Image
+                      src={t.preview}
+                      alt={`${t.label} theme preview`}
+                      width={120}
+                      height={80}
+                      className="dialog-theme-preview"
+                    />
+                    <span className="dialog-theme-label">{t.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="dialog-actions">
             <Button variant="outline" type="button" onClick={handleOverlayClick} disabled={loading}>
