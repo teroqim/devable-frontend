@@ -1,0 +1,52 @@
+.tool-use {
+  border: 1px solid hsl(var(--colors-border));
+  border-radius: var(--radius-6);
+  overflow: hidden;
+
+  .tool-use-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+    padding: var(--spacing-4) var(--spacing-8);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    color: hsl(var(--colors-muted-foreground));
+    width: 100%;
+    text-align: left;
+  }
+
+  .tool-use-name {
+    flex: 1;
+    font-family: monospace;
+  }
+
+  .tool-use-chevron {
+    transition: var(--transition-fast);
+  }
+
+  .tool-use-chevron--expanded {
+    transform: rotate(90deg);
+  }
+
+  .tool-use-output {
+    padding: var(--spacing-8);
+    margin: 0;
+    font-size: var(--font-size-xs);
+    font-family: monospace;
+    background: hsl(var(--colors-background));
+    border-top: 1px solid hsl(var(--colors-border));
+    overflow-x: auto;
+    max-height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+}
+
+@media (hover: hover) {
+  .tool-use-header:hover {
+    background: hsl(var(--colors-muted));
+  }
+}

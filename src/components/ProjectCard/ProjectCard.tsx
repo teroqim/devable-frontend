@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import type { ApiProject } from '@/types/api';
 import { Button } from '@/components/ui/button/button';
 import Heading from '@/components/ui/heading/Heading';
@@ -40,7 +41,9 @@ export default function ProjectCard({ project, onStart, onStop, onDelete }: Proj
   return (
     <article className="project-card">
       <div className="project-card-header">
-        <Heading as="h3" size="sm">{project.name}</Heading>
+        <Link href={`/project/${project.id}`} className="project-card-name-link">
+          <Heading as="h3" size="sm">{project.name}</Heading>
+        </Link>
         <span className={`project-card-status project-card-status--${project.status}`}>
           {STATUS_LABELS[project.status] ?? project.status}
         </span>

@@ -1,0 +1,20 @@
+.session-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+
+  .session-selector-dropdown {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-4) var(--spacing-8);
+    border: 1px solid hsl(var(--colors-input));
+    border-radius: var(--radius-6);
+    background: hsl(var(--colors-background));
+    color: hsl(var(--colors-foreground));
+    max-width: 200px;
+  }
+
+  .session-selector-dropdown:focus {
+    outline: 2px solid hsl(var(--colors-ring));
+    outline-offset: -1px;
+  }
+}
