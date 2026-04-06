@@ -1,0 +1,19 @@
+.cost-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  font-size: var(--font-size-xs);
+  color: hsl(var(--colors-muted-foreground));
+
+  .cost-display-total {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .cost-display-tokens {
+    font-family: monospace;
+  }
+}
+
+.cost-display--compact {
+  font-size: var(--font-size-xs);
+}

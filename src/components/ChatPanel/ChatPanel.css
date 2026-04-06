@@ -1,0 +1,25 @@
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  min-width: 320px;
+  border-right: 1px solid hsl(var(--colors-border));
+  background: hsl(var(--colors-card));
+
+  .chat-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-8) var(--spacing-12);
+    border-bottom: 1px solid hsl(var(--colors-border));
+  }
+
+  .chat-panel-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-12);
+  }
+}
