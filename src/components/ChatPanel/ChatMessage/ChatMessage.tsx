@@ -3,20 +3,19 @@
 import clsx from 'clsx';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import type { ApiTokenUsage } from '@/types/api';
+import type { DisplayMessage } from '../ChatPanel.types';
 import ToolUseIndicator from '../ToolUseIndicator/ToolUseIndicator';
 import CostDisplay from '../CostDisplay/CostDisplay';
+import ElapsedTimer from '../ElapsedTimer/ElapsedTimer';
 import './ChatMessage.css';
 
-interface DisplayMessage {
-  id: string;
-  role: 'user' | 'assistant';
-  content: string;
-  images?: unknown;
-  toolUses?: Array<{ tool: string; id: string; input?: unknown; output?: string }>;
-  usage?: ApiTokenUsage;
-  cost?: number | null;
-  isStreaming?: boolean;
+function formatElapsed(seconds: number): string {
+  if (seconds < 60) {
+    return `${seconds}s`;
+  }
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}m ${remainingSeconds}s`;
 }
 
 interface ChatMessageProps {
@@ -30,27 +29,37 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     <div className={clsx('chat-message', isUser ? 'chat-message--user' : 'chat-message--assistant')}>
       <div className="chat-message-label">{isUser ? 'You' : 'Assistant'}</div>
       <div className="chat-message-content">
-        {isUser ? (
-          <p className="chat-message-text">{message.content}</p>
-        ) : (
-          <div className="chat-message-markdown">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
-          </div>
-        )}
-        {message.toolUses && message.toolUses.length > 0 && (
-          <div className="chat-message-tools">
-            {message.toolUses.map((tool) => (
-              <ToolUseIndicator key={tool.id} tool={tool} />
-            ))}
-          </div>
-        )}
+        {message.contentBlocks.map((block, index) => {
+          if (block.type === 'text') {
+            if (isUser) {
+              return <p key={index} className="chat-message-text">{block.text}</p>;
+            }
+            return (
+              <div key={index} className="chat-message-markdown">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{block.text}</ReactMarkdown>
+              </div>
+            );
+          }
+          if (block.type === 'tool_use') {
+            return <ToolUseIndicator key={block.id} tool={block} />;
+          }
+          return null;
+        })}
         {message.isStreaming && (
           <span className="chat-message-streaming">...</span>
         )}
       </div>
-      {!isUser && message.cost != null && (
+      {!isUser && (
         <div className="chat-message-footer">
-          <CostDisplay cost={message.cost} usage={message.usage} compact />
+          {message.isStreaming && (
+            <ElapsedTimer isRunning />
+          )}
+          {!message.isStreaming && message.elapsedSeconds != null && (
+            <span className="chat-message-elapsed">{formatElapsed(message.elapsedSeconds)}</span>
+          )}
+          {!message.isStreaming && message.cost != null && (
+            <CostDisplay cost={message.cost} usage={message.usage} compact />
+          )}
         </div>
       )}
     </div>

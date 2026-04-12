@@ -117,6 +117,7 @@ export default function ChatInput({ onSend, onCancel, isStreaming, disabled }: C
           <PaperclipIcon size={16} />
         </button>
         <textarea
+          id="chat-message-input"
           ref={textareaRef}
           className="chat-input-textarea"
           value={text}
@@ -132,6 +133,7 @@ export default function ChatInput({ onSend, onCancel, isStreaming, disabled }: C
         </Button>
       </div>
       <input
+        id="chat-image-upload"
         ref={fileInputRef}
         type="file"
         accept="image/png,image/jpeg,image/gif,image/webp"

@@ -1,0 +1,53 @@
+.file-tree-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 220px;
+  min-width: 160px;
+  flex-shrink: 0;
+  background: hsl(var(--colors-card));
+  border-right: 1px solid hsl(var(--colors-border));
+
+  .file-tree-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-8) var(--spacing-12);
+    border-bottom: 1px solid hsl(var(--colors-border));
+
+    .file-tree-panel-title {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      color: hsl(var(--colors-muted-foreground));
+      letter-spacing: 0.05em;
+    }
+
+    .file-tree-panel-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-2);
+    }
+  }
+
+  .file-tree-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-4);
+  }
+
+  .file-tree-panel-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: hsl(var(--colors-muted-foreground));
+    font-size: var(--font-size-sm);
+  }
+
+  .file-tree-panel-error {
+    padding: var(--spacing-12);
+    color: hsl(var(--colors-destructive));
+    font-size: var(--font-size-sm);
+  }
+}

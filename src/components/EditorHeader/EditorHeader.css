@@ -1,0 +1,59 @@
+.editor-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-8) var(--spacing-16);
+  border-bottom: 1px solid hsl(var(--colors-border));
+  background: hsl(var(--colors-card));
+
+  .editor-header-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .editor-header-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+    font-size: var(--font-size-xs);
+    color: hsl(var(--colors-muted-foreground));
+  }
+
+  .editor-header-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: hsl(var(--colors-muted-foreground));
+
+    &--running {
+      background: hsl(142 76% 36%);
+    }
+
+    &--error {
+      background: hsl(var(--colors-destructive));
+    }
+
+    &--rebuilding {
+      background: hsl(45 93% 47%);
+    }
+
+    &--stopped {
+      background: hsl(var(--colors-muted-foreground));
+    }
+  }
+
+  .editor-header-error {
+    font-size: var(--font-size-xs);
+    color: hsl(var(--colors-destructive));
+  }
+
+  .editor-header-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+  }
+}

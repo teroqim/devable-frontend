@@ -81,6 +81,8 @@ You may do all read only commands freely, but you must always ask for permission
 - Default to small, focused components
 - Always lint changed files after edits
 - Check `.claude/rules/` for code style and CSS rules
+- Always check existing UI components (`src/components/ui/`) before using raw HTML elements
+- You may use shadcn/ui components, but you must convert them from Tailwind to plain CSS before adding them
 
 ### Don'ts
 

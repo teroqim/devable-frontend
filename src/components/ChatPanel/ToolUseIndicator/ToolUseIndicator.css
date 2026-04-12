@@ -22,6 +22,10 @@
     font-family: monospace;
   }
 
+  .tool-use-spinner {
+    animation: spin 1s linear infinite;
+  }
+
   .tool-use-chevron {
     transition: var(--transition-fast);
   }

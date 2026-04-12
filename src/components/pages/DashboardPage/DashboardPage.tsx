@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useAuth } from '@clerk/nextjs';
-import { fetchProjects, createProject, deleteProject, startProject, stopProject } from '@/lib/api-client';
+import { fetchProjects, createProject, deleteProject, startProjectAsync, stopProjectAsync } from '@/lib/api-client';
 import type { ApiProject } from '@/types/api';
 import Heading from '@/components/ui/heading/Heading';
 import { Button } from '@/components/ui/button/button';
@@ -76,7 +76,7 @@ export default function DashboardPage() {
 
   async function handleStart(id: string) {
     try {
-      await startProject(id, getToken);
+      await startProjectAsync(id, getToken);
       const data = await fetchProjects(getToken);
       setProjects(data);
     } catch (err) {
@@ -86,7 +86,7 @@ export default function DashboardPage() {
 
   async function handleStop(id: string) {
     try {
-      await stopProject(id, getToken);
+      await stopProjectAsync(id, getToken);
       const data = await fetchProjects(getToken);
       setProjects(data);
     } catch (err) {

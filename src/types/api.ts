@@ -24,7 +24,7 @@ export interface ApiProject {
   name: string;
   slug: string;
   userId: string;
-  status: 'created' | 'starting' | 'running' | 'stopped' | 'error';
+  status: 'created' | 'starting' | 'running' | 'stopped' | 'error' | 'rebuilding';
   previewUrl: string;
   createdAt: string;
   updatedAt: string;
@@ -79,6 +79,53 @@ export interface ApiImageAttachment {
   mediaType: 'image/png' | 'image/jpeg' | 'image/gif' | 'image/webp';
   base64: string;
 }
+
+// File browsing types
+
+export interface FileTreeEntry {
+  name: string;
+  path: string;
+  type: 'file' | 'directory';
+  size?: number;
+  modifiedAt?: string;
+  children?: FileTreeEntry[];
+  /** True if directory was too large for eager loading. Frontend must fetch on demand. */
+  lazy?: boolean;
+}
+
+export interface FileTreeResponse {
+  tree: FileTreeEntry[];
+}
+
+export interface FileContentResponse {
+  content: string;
+  modifiedAt: string;
+}
+
+export interface FileWriteResponse {
+  modifiedAt: string;
+}
+
+export interface FileCreateBody {
+  path: string;
+  type: 'file' | 'directory';
+  content?: string;
+}
+
+export interface FileRenameBody {
+  newPath: string;
+}
+
+// Log types
+
+export interface LogsResponse {
+  logs: string;
+}
+
+export type LogStreamEvent =
+  | { type: 'log'; line: string }
+  | { type: 'keepalive' }
+  | { type: 'error'; error: string };
 
 export type ChatStreamEvent =
   | { type: 'text_delta'; text: string }

@@ -4,43 +4,30 @@
   height: 100vh;
   background: hsl(var(--colors-background));
 
-  .editor-header {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-12);
-    padding: var(--spacing-12) var(--spacing-16);
-    border-bottom: 1px solid hsl(var(--colors-border));
-    background: hsl(var(--colors-card));
-  }
-
-  .editor-project-name {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
-    flex: 1;
-  }
-
-  .editor-status-badge {
-    font-size: var(--font-size-xs);
-    padding: var(--spacing-4) var(--spacing-8);
-    border-radius: var(--radius-full);
-    background: hsl(var(--colors-muted));
-    color: hsl(var(--colors-muted-foreground));
-  }
-
-  .editor-status-badge--running {
-    background: hsl(142 76% 36% / 0.1);
-    color: hsl(142 76% 36%);
-  }
-
-  .editor-status-badge--error {
-    background: hsl(var(--colors-destructive) / 0.1);
-    color: hsl(var(--colors-destructive));
-  }
-
-  .editor-content {
-    display: flex;
+  .editor-panels {
     flex: 1;
     overflow: hidden;
+  }
+
+  .editor-panel-chat {
+    overflow: hidden;
+  }
+
+  .editor-panel-main {
+    overflow: hidden;
+  }
+
+  .editor-resize-handle {
+    width: 4px;
+    background: hsl(var(--colors-border));
+    cursor: col-resize;
+    transition: background var(--transition-fast);
+  }
+}
+
+@media (hover: hover) {
+  .editor-resize-handle:hover {
+    background: hsl(var(--colors-primary) / 0.3);
   }
 }
 

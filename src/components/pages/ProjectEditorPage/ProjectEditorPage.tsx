@@ -3,12 +3,15 @@
 import { use, useEffect, useState } from 'react';
 import { useAuth } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
+import { Panel, Group as PanelGroup, Separator as PanelResizeHandle } from 'react-resizable-panels';
 import { fetchProject } from '@/lib/api-client';
 import type { ApiProject } from '@/types/api';
-import { ArrowLeft as ArrowLeftIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button/button';
+import { ProjectEditorProvider } from '@/contexts/ProjectEditorContext';
+import EditorHeader from '@/components/EditorHeader/EditorHeader';
+import EditorFooter from '@/components/EditorFooter/EditorFooter';
 import ChatPanel from '@/components/ChatPanel/ChatPanel';
-import PreviewPanel from '@/components/PreviewPanel/PreviewPanel';
+import MainArea from '@/components/MainArea/MainArea';
 import './ProjectEditorPage.css';
 
 interface ProjectEditorPageProps {
@@ -24,7 +27,9 @@ export default function ProjectEditorPage({ paramsPromise }: ProjectEditorPagePr
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isLoaded) return;
+    if (!isLoaded) {
+      return;
+    }
 
     async function loadAsync() {
       try {
@@ -58,21 +63,20 @@ export default function ProjectEditorPage({ paramsPromise }: ProjectEditorPagePr
   }
 
   return (
-    <div className="editor-page">
-      <header className="editor-header">
-        <Button variant="ghost" size="sm" onClick={handleBackClick}>
-          <ArrowLeftIcon size={16} />
-          Back
-        </Button>
-        <h1 className="editor-project-name">{project.name}</h1>
-        <span className={`editor-status-badge editor-status-badge--${project.status}`}>
-          {project.status}
-        </span>
-      </header>
-      <div className="editor-content">
-        <ChatPanel project={project} />
-        <PreviewPanel project={project} />
+    <ProjectEditorProvider initialProject={project} getToken={getToken}>
+      <div className="editor-page">
+        <EditorHeader />
+        <PanelGroup orientation="horizontal" defaultLayout={{ chat: 35, main: 65 }} className="editor-panels">
+          <Panel id="chat" minSize={20} className="editor-panel-chat">
+            <ChatPanel project={project} />
+          </Panel>
+          <PanelResizeHandle className="editor-resize-handle" />
+          <Panel id="main" minSize={30} className="editor-panel-main">
+            <MainArea />
+          </Panel>
+        </PanelGroup>
+        <EditorFooter />
       </div>
-    </div>
+    </ProjectEditorProvider>
   );
 }

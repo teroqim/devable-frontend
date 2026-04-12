@@ -25,6 +25,7 @@ export default function SessionSelector({
   return (
     <div className="session-selector">
       <select
+        id="chat-session-selector"
         className="session-selector-dropdown"
         value={currentSessionId ?? ''}
         onChange={handleSelectChange}
