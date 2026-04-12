@@ -1,0 +1,30 @@
+.editor-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  padding: var(--spacing-4) var(--spacing-16);
+  border-top: 1px solid hsl(var(--colors-border));
+  background: hsl(var(--colors-card));
+  font-size: var(--font-size-xs);
+  color: hsl(var(--colors-muted-foreground));
+
+  .editor-footer-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+  }
+
+  .editor-footer-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+
+    &--connected {
+      background: hsl(142 76% 36%);
+    }
+
+    &--disconnected {
+      background: hsl(var(--colors-destructive));
+    }
+  }
+}

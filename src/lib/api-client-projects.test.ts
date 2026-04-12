@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { fetchProjects, createProject, deleteProject, startProject, stopProject, ApiError } from './api-client';
+import { fetchProjects, createProject, deleteProject, startProjectAsync, stopProjectAsync, ApiError } from './api-client';
 
 const mockGetToken = vi.fn();
 
@@ -73,26 +73,26 @@ describe('deleteProject', () => {
   });
 });
 
-describe('startProject', () => {
+describe('startProjectAsync', () => {
   it('should send POST to start endpoint', async () => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: () => Promise.resolve({ status: 'started' }),
     });
 
-    await startProject('1', mockGetToken);
+    await startProjectAsync('1', mockGetToken);
     expect(global.fetch).toHaveBeenCalledWith('/api/projects/1/start', expect.objectContaining({ method: 'POST' }));
   });
 });
 
-describe('stopProject', () => {
+describe('stopProjectAsync', () => {
   it('should send POST to stop endpoint', async () => {
     global.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: () => Promise.resolve({ status: 'stopped' }),
     });
 
-    await stopProject('1', mockGetToken);
+    await stopProjectAsync('1', mockGetToken);
     expect(global.fetch).toHaveBeenCalledWith('/api/projects/1/stop', expect.objectContaining({ method: 'POST' }));
   });
 });

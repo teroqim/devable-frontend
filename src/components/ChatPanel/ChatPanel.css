@@ -1,9 +1,7 @@
 .chat-panel {
   display: flex;
   flex-direction: column;
-  width: 40%;
-  min-width: 320px;
-  border-right: 1px solid hsl(var(--colors-border));
+  height: 100%;
   background: hsl(var(--colors-card));
 
   .chat-panel-header {

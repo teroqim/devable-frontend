@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { RefreshCw as RefreshIcon, ExternalLink as ExternalLinkIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button/button';
+import { useProjectEditor } from '@/contexts/ProjectEditorContext';
 import type { ApiProject } from '@/types/api';
 import './PreviewPanel.css';
 
@@ -11,11 +12,19 @@ interface PreviewPanelProps {
 }
 
 export default function PreviewPanel({ project }: PreviewPanelProps) {
+  const { lastAgentFileChange } = useProjectEditor();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [autoRefresh, setAutoRefresh] = useState(false);
   const previewUrl = project.previewUrl.startsWith('http')
     ? project.previewUrl
     : `http://${project.previewUrl}`;
+
+  // Auto-refresh iframe when agent makes file changes and auto-refresh is ON
+  useEffect(() => {
+    if (autoRefresh && lastAgentFileChange > 0 && iframeRef.current) {
+      iframeRef.current.src = iframeRef.current.src;
+    }
+  }, [autoRefresh, lastAgentFileChange]);
 
   function handleRefresh() {
     if (iframeRef.current) {
@@ -38,6 +47,7 @@ export default function PreviewPanel({ project }: PreviewPanelProps) {
         <div className="preview-panel-actions">
           <label className="preview-panel-auto-refresh">
             <input
+              id="preview-auto-refresh"
               type="checkbox"
               checked={autoRefresh}
               onChange={handleAutoRefreshToggle}

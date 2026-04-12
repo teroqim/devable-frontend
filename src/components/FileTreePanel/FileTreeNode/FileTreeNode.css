@@ -1,0 +1,110 @@
+.file-tree-node {
+  .file-tree-node-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    padding: var(--spacing-2) var(--spacing-8);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    color: hsl(var(--colors-foreground));
+    border-radius: var(--radius-6);
+    user-select: none;
+    transition: background var(--transition-fast);
+
+    &--active {
+      background: hsl(var(--colors-accent));
+    }
+
+    &--drop-target {
+      outline: 2px solid hsl(var(--colors-primary) / 0.5);
+    }
+  }
+
+  .file-tree-node-chevron {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+
+    &--expanded {
+      transform: rotate(90deg);
+    }
+  }
+
+  .file-tree-node-chevron-placeholder {
+    width: 14px;
+    flex-shrink: 0;
+  }
+
+  .file-tree-node-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: hsl(var(--colors-muted-foreground));
+  }
+
+  .file-tree-node-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .file-tree-node-children {
+    padding-left: var(--spacing-12);
+  }
+
+  .file-tree-context-menu {
+    position: fixed;
+    z-index: 100;
+    min-width: 140px;
+    padding: var(--spacing-4) 0;
+    background: hsl(var(--colors-card));
+    border: 1px solid hsl(var(--colors-border));
+    border-radius: var(--radius-6);
+    box-shadow: var(--shadow-lg);
+
+    .file-tree-context-menu-item {
+      display: block;
+      width: 100%;
+      padding: var(--spacing-6) var(--spacing-12);
+      border: none;
+      background: transparent;
+      color: hsl(var(--colors-foreground));
+      font-size: var(--font-size-sm);
+      text-align: left;
+      cursor: pointer;
+
+      &--danger {
+        color: hsl(var(--colors-destructive));
+      }
+    }
+
+    .file-tree-context-menu-separator {
+      height: 1px;
+      margin: var(--spacing-4) 0;
+      background: hsl(var(--colors-border));
+    }
+  }
+
+  .file-tree-node-inline-input {
+    flex: 1;
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-2) var(--spacing-4);
+    border: 1px solid hsl(var(--colors-primary));
+    border-radius: var(--radius-6);
+    background: hsl(var(--colors-background));
+    color: hsl(var(--colors-foreground));
+    outline: none;
+  }
+}
+
+@media (hover: hover) {
+  .file-tree-node-row:hover:not(.file-tree-node-row--active) {
+    background: hsl(var(--colors-muted));
+  }
+
+  .file-tree-context-menu-item:hover {
+    background: hsl(var(--colors-muted));
+  }
+}

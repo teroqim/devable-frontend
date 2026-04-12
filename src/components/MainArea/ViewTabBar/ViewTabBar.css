@@ -1,0 +1,33 @@
+.view-tab-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4) var(--spacing-8);
+  border-bottom: 1px solid hsl(var(--colors-border));
+  background: hsl(var(--colors-card));
+
+  .view-tab-bar-button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+    padding: var(--spacing-6) var(--spacing-12);
+    border: none;
+    border-radius: var(--radius-6);
+    background: transparent;
+    color: hsl(var(--colors-muted-foreground));
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+
+    &--active {
+      background: hsl(var(--colors-accent));
+      color: hsl(var(--colors-accent-foreground));
+    }
+  }
+}
+
+@media (hover: hover) {
+  .view-tab-bar-button:hover:not(.view-tab-bar-button--active) {
+    background: hsl(var(--colors-muted));
+  }
+}

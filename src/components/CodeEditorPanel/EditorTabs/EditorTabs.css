@@ -1,0 +1,60 @@
+.editor-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border-bottom: 1px solid hsl(var(--colors-border));
+  background: hsl(var(--colors-card));
+  overflow-x: auto;
+
+  .editor-tab {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-6);
+    padding: var(--spacing-6) var(--spacing-12);
+    font-size: var(--font-size-xs);
+    color: hsl(var(--colors-muted-foreground));
+    border-right: 1px solid hsl(var(--colors-border));
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--transition-fast), color var(--transition-fast);
+
+    &--active {
+      color: hsl(var(--colors-foreground));
+      background: hsl(var(--colors-background));
+    }
+
+    .editor-tab-dirty {
+      width: 6px;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: hsl(var(--colors-primary));
+    }
+
+    .editor-tab-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border: none;
+      background: transparent;
+      color: hsl(var(--colors-muted-foreground));
+      cursor: pointer;
+      border-radius: var(--radius-6);
+      padding: 0;
+      font-size: var(--font-size-xs);
+      line-height: 1;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .editor-tab:hover:not(.editor-tab--active) {
+    background: hsl(var(--colors-muted));
+  }
+
+  .editor-tab-close:hover {
+    background: hsl(var(--colors-muted));
+    color: hsl(var(--colors-foreground));
+  }
+}
